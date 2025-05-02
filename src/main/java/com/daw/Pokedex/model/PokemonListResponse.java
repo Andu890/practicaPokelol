@@ -1,17 +1,14 @@
-import com.daw.Pokedex.model.PokemonSummary;
+package com.daw.Pokedex.model;
 
 import java.util.List;
 
 public class PokemonListResponse {
-        private int count;
-        private List<PokemonSummary> items;
-        // Getters and setters
+    private int count;
+    private List<PokemonSummary> items;
+    // Getters and setters
 
-    public List<PokemonSummary> getItems() {
-        return items;
-    }
-
-    public void setItems(List<PokemonSummary> items) {
+    public PokemonListResponse(int count, List<PokemonSummary> items) {
+        this.count = count;
         this.items = items;
     }
 
@@ -23,8 +20,11 @@ public class PokemonListResponse {
         this.count = count;
     }
 
-    public PokemonListResponse(int count, List<PokemonSummary> items) {
-        this.count = count;
+    public List<PokemonSummary> getItems() {
+        return items;
+    }
+
+    public void setItems(List<PokemonSummary> items) {
         this.items = items;
     }
 }

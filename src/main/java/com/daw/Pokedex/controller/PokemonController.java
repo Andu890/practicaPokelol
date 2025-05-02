@@ -2,11 +2,16 @@ package com.daw.Pokedex.controller;
 
 import com.daw.Pokedex.model.*;
 
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-public class PokemonController {
 
+
+@RestController
+@RequestMapping("/api/pokedex")
+
+class PokemonController {
     private final List<PokemonSummary> pokemonList = Arrays.asList(
             new PokemonSummary(30, "nidorina", 200,
                     List.of(new TypeSlot(new Type("poison", "https://pokeapi.co/api/v2/type/4/"), 1)),
@@ -54,4 +59,18 @@ public class PokemonController {
                     new Sprite("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png")
             )
     );
+
+    @GetMapping
+    public PokemonListResponse obtenerPokedex(@RequestParam int offSet, @RequestParam int limit ) {
+        return new PokemonListResponse(pokemonList.size(), pokemonList.stream().skip(offSet).limit(limit).toList());
+    }
+
+    @GetMapping("/{id}")
+    public PokemonSummary obtenerPorId(@PathVariable int id) {
+        return pokemonList.stream().filter(t ->t.getId() == id).findFirst().orElse(null);
+
+    }
+
 }
+
+
